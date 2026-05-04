@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Panini Mundial 2026</title>
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --card: #131929;
+    --card2: #1a2235;
+    --accent: #f5c518;
+    --accent2: #e8424a;
+    --green: #2ecc71;
+    --text: #e8eaf0;
+    --muted: #7a859a;
+    --border: #232f47;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0d1526 0%, #1a2744 50%, #0d1526 100%);
+    padding: 18px 16px 12px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .header-title { font-size: 1.8rem; font-weight: 900; letter-spacing: 3px; color: var(--accent); line-height: 1; }
+  .header-sub { font-size: 0.68rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+  .mode-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-top: 5px;
+    letter-spacing: 1px;
+  }
+  .mode-badge.owner { background: var(--accent); color: #0a0e1a; }
+  .mode-badge.viewer { background: #2a3a5a; color: var(--muted); }
+  .header-stats { display: flex; justify-content: center; gap: 14px; margin-top: 10px; }
+  .stat-pill {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 13px;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .stat-pill span { color: var(--accent); }
+
+  /* PROGRESS */
+  .progress-wrap { background: #0d1526; padding: 8px 16px; border-bottom: 1px solid var(--border); }
+  .progress-bar-bg { background: var(--border); border-radius: 10px; height: 8px; overflow: hidden; }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    height: 100%; border-radius: 10px; transition: width 0.4s ease; width: 0%;
+  }
+  .progress-label { font-size: 0.68rem; color: var(--muted); text-align: right; margin-top: 3px; }
+
+  /* FILTERS */
+  .filter-wrap {
+    padding: 8px 12px; display: flex; gap: 7px; overflow-x: auto;
+    scrollbar-width: none; border-bottom: 1px solid var(--border); background: var(--card);
+  }
+  .filter-wrap::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    flex-shrink: 0; background: transparent; border: 1px solid var(--border);
+    border-radius: 20px; color: var(--muted); font-family: inherit;
+    font-size: 0.75rem; font-weight: 700; padding: 5px 14px; cursor: pointer;
+  }
+  .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #0a0e1a; }
+
+  /* CONTENT */
+  .content { padding: 10px 10px 0; }
+  .section-divider {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 4px 7px; font-size: 0.72rem; font-weight: 900;
+    letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
+  }
+  .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* CARDS */
+  .country-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 8px; overflow: hidden;
+  }
+  .country-card.completed { border-color: rgba(46,204,113,0.35); opacity: 0.75; }
+  .country-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 12px; cursor: pointer; user-select: none;
+    -webkit-tap-highlight-color: transparent; gap: 8px;
+  }
+  .country-left { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+  .country-name { font-weight: 800; font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .repechaje-label {
+    font-size: 0.58rem; color: var(--accent); font-weight: 800; letter-spacing: 1px;
+    background: rgba(245,197,24,0.12); padding: 1px 5px; border-radius: 4px; flex-shrink: 0;
+  }
+  .country-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+  .mini-progress { height: 3px; background: var(--border); width: 46px; border-radius: 3px; overflow: hidden; }
+  .mini-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent)); border-radius: 3px; transition: width 0.3s; }
+  .badge { background: var(--accent2); color: white; border-radius: 20px; padding: 2px 9px; font-size: 0.67rem; font-weight: 800; white-space: nowrap; }
+  .badge.done { background: var(--green); color: #0a0e1a; }
+  .badge.partial { background: var(--accent); color: #0a0e1a; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.25s; display: inline-block; }
+  .country-card.open .chevron { transform: rotate(180deg); }
+
+  /* STICKER GRID */
+  .sticker-grid {
+    display: none; padding: 10px 12px 12px;
+    border-top: 1px solid var(--border);
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr)); gap: 6px;
+  }
+  .country-card.open .sticker-grid { display: grid; }
+  .sticker-btn {
+    background: var(--card2); border: 1.5px solid var(--border);
+    border-radius: 9px; color: var(--text); font-family: inherit;
+    font-size: 0.82rem; font-weight: 700; padding: 10px 4px;
+    text-align: center; cursor: pointer; position: relative;
+    -webkit-tap-highlight-color: transparent; transition: all 0.15s;
+  }
+  .sticker-btn:active { transform: scale(0.9); }
+  .sticker-btn.got { background: rgba(46,204,113,0.15); border-color: var(--green); color: var(--green); }
+  .sticker-btn.got::after { content: 'v'; position: absolute; top: 1px; right: 3px; font-size: 0.52rem; color: var(--green); }
+  .sticker-btn.readonly { cursor: default; }
+  .sticker-btn.readonly:active { transform: none; }
+
+  /* SYNC STATUS */
+  .sync-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--card); border-top: 1px solid var(--border);
+    padding: 8px 16px; display: flex; align-items: center;
+    justify-content: space-between; z-index: 99; font-size: 0.72rem;
+  }
+  .sync-dot { width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; display: inline-block; }
+  .sync-dot.ok { background: var(--green); }
+  .sync-dot.loading { background: var(--accent); animation: pulse 1s infinite; }
+  .sync-dot.err { background: var(--accent2); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .sync-left { display: flex; align-items: center; color: var(--muted); }
+  .sync-right { display: flex; gap: 10px; }
+  .sync-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-family: inherit; font-size: 0.7rem;
+    padding: 4px 12px; border-radius: 20px; cursor: pointer;
+  }
+  .sync-btn.danger { border-color: var(--accent2); color: var(--accent2); }
+
+  /* LOGIN MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; padding: 20px;
+  }
+  .modal-overlay.hidden { display: none; }
+  .modal {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 18px; padding: 28px 24px; width: 100%; max-width: 340px;
+    text-align: center;
+  }
+  .modal h2 { font-size: 1.2rem; font-weight: 900; color: var(--accent); margin-bottom: 6px; }
+  .modal p { font-size: 0.8rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+  .modal input {
+    width: 100%; background: var(--card2); border: 1.5px solid var(--border);
+    border-radius: 10px; color: var(--text); font-family: inherit;
+    font-size: 1rem; padding: 12px 14px; margin-bottom: 12px; outline: none;
+    text-align: center; letter-spacing: 3px;
+  }
+  .modal input:focus { border-color: var(--accent); }
+  .modal-btn {
+    width: 100%; background: var(--accent); border: none;
+    border-radius: 10px; color: #0a0e1a; font-family: inherit;
+    font-size: 0.95rem; font-weight: 800; padding: 13px;
+    cursor: pointer; margin-bottom: 8px;
+  }
+  .modal-btn.secondary {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); font-size: 0.8rem; padding: 10px;
+  }
+  .modal-error { color: var(--accent2); font-size: 0.78rem; margin-bottom: 10px; min-height: 18px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 52px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--green); color: #0a0e1a;
+    font-weight: 800; font-size: 0.8rem; padding: 9px 20px;
+    border-radius: 30px; z-index: 300; transition: transform 0.3s ease;
+    white-space: nowrap; box-shadow: 0 4px 20px rgba(46,204,113,0.4);
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* LOADING */
+  .loading-screen {
+    position: fixed; inset: 0; background: var(--bg);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; z-index: 500; gap: 16px;
+  }
+  .loading-screen.hidden { display: none; }
+  .loading-title { font-size: 1.5rem; font-weight: 900; color: var(--accent); letter-spacing: 3px; }
+  .loading-sub { font-size: 0.75rem; color: var(--muted); letter-spacing: 1px; }
+  .spinner {
+    width: 36px; height: 36px; border: 3px solid var(--border);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-title">PANINI 2026</div>
+  <div class="spinner"></div>
+  <div class="loading-sub">Conectando...</div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay hidden" id="loginModal">
+  <div class="modal">
+    <h2>Modo Edicion</h2>
+    <p>Ingresa la contrasena para editar las cartas</p>
+    <div class="modal-error" id="loginError"></div>
+    <input type="password" id="pinInput" placeholder="Contrasena" maxlength="20">
+    <button class="modal-btn" onclick="tryLogin()">Entrar</button>
+    <button class="modal-btn secondary" onclick="closeLogin()">Solo ver</button>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-title">PANINI 2026</div>
+  <div class="header-sub">Tracker de Cartas Faltantes</div>
+  <div id="modeBadge" class="mode-badge viewer">MODO VISTA</div>
+  <div class="header-stats">
+    <div class="stat-pill">Faltan: <span id="totalLeft">-</span></div>
+    <div class="stat-pill">Conseguidas: <span id="totalGot">-</span></div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="mainProgress"></div></div>
+  <div class="progress-label" id="progressLabel">Cargando...</div>
+</div>
+
+<div class="filter-wrap">
+  <button class="filter-btn active" onclick="filterCards('all',this)">Todos</button>
+  <button class="filter-btn" onclick="filterCards('pending',this)">Pendientes</button>
+  <button class="filter-btn" onclick="filterCards('partial',this)">Parciales</button>
+  <button class="filter-btn" onclick="filterCards('done',this)">Completos</button>
+</div>
+
+<div class="content" id="mainContent"></div>
+
+<!-- SYNC BAR -->
+<div class="sync-bar">
+  <div class="sync-left">
+    <span class="sync-dot loading" id="syncDot"></span>
+    <span id="syncLabel">Conectando...</span>
+  </div>
+  <div class="sync-right" id="syncButtons">
+    <button class="sync-btn" onclick="showLogin()">Editar</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- FIREBASE -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBPPDLyAC5EUrnre5DUIaYRTGfMzUdE-3c",
+  authDomain: "panini2026-362fd.firebaseapp.com",
+  databaseURL: "https://panini2026-362fd-default-rtdb.firebaseio.com",
+  projectId: "panini2026-362fd",
+  storageBucket: "panini2026-362fd.firebasestorage.app",
+  messagingSenderId: "1099363365537",
+  appId: "1:1099363365537:web:e5966b28d36edf2b6c36e0"
+};
+var OWNER_PIN = "panini2026";  // <-- Cambia esta contrasena cuando quieras
+
+// ── TEAMS DATA ───────────────────────────────────────────────────────
+function range(n){var a=[];for(var i=1;i<=n;i++)a.push(i);return a;}
+var TEAMS=[
+  {id:"fwc",name:"FWC (Mundial)",s:[2,4,6,8,18],rep:false},
+  {id:"mex",name:"Mexico",s:[11,20],rep:false},
+  {id:"rsa",name:"Sudafrica",s:[6,11,12,20],rep:false},
+  {id:"kor",name:"Corea del Sur",s:[3,8,15],rep:false},
+  {id:"can",name:"Canada",s:[9],rep:false},
+  {id:"qat",name:"Qatar",s:[5],rep:false},
+  {id:"sui",name:"Suiza",s:[6,8,16],rep:false},
+  {id:"bra",name:"Brasil",s:[11,12,14,17],rep:false},
+  {id:"mar",name:"Marruecos",s:[1,2,14],rep:false},
+  {id:"hai",name:"Haiti",s:[1,12,20],rep:false},
+  {id:"sco",name:"Escocia",s:[3],rep:false},
+  {id:"usa",name:"USA",s:[1,5,16],rep:false},
+  {id:"par",name:"Paraguay",s:[15,17],rep:false},
+  {id:"aus",name:"Australia",s:[14,15,17,20],rep:false},
+  {id:"ger",name:"Alemania",s:[10,14],rep:false},
+  {id:"cuw",name:"Curazao",s:[2,6,10,14,18],rep:false},
+  {id:"civ",name:"Costa de Marfil",s:[16,20],rep:false},
+  {id:"ecu",name:"Ecuador",s:[7],rep:false},
+  {id:"ned",name:"Holanda",s:[10],rep:false},
+  {id:"jpn",name:"Japon",s:[4],rep:false},
+  {id:"tun",name:"Tunez",s:[11],rep:false},
+  {id:"bel",name:"Belgica",s:[3,4,17],rep:false},
+  {id:"egy",name:"Egipto",s:[2,3,4,8,12],rep:false},
+  {id:"irn",name:"Iran",s:[5,11,13],rep:false},
+  {id:"nzl",name:"Nueva Zelanda",s:[1,15,16,17],rep:false},
+  {id:"esp",name:"Espana",s:[3,11],rep:false},
+  {id:"cpv",name:"Cabo Verde",s:[2,20],rep:false},
+  {id:"ksa",name:"Arabia Saudita",s:[11,14,18],rep:false},
+  {id:"uru",name:"Uruguay",s:[1,4,6,7,8],rep:false},
+  {id:"fra",name:"Francia",s:[14,15,18],rep:false},
+  {id:"sen",name:"Senegal",s:[12],rep:false},
+  {id:"nor",name:"Noruega",s:[1,2,5,6,9,12,18,20],rep:false},
+  {id:"arg",name:"Argentina",s:[3,11,12,20],rep:false},
+  {id:"alg",name:"Argelia",s:[4],rep:false},
+  {id:"aut",name:"Austria",s:[5,9,10,17],rep:false},
+  {id:"jor",name:"Jordania",s:[1,4,5,6,9,10,13,19],rep:false},
+  {id:"por",name:"Portugal",s:[5,12,20],rep:false},
+  {id:"uzb",name:"Uzbekistan",s:[13,18],rep:false},
+  {id:"col",name:"Colombia",s:[3,11,15,18],rep:false},
+  {id:"eng",name:"Inglaterra",s:[6,17],rep:false},
+  {id:"cro",name:"Croacia",s:[13,14,15],rep:false},
+  {id:"gha",name:"Ghana",s:[4,17],rep:false},
+  {id:"pan",name:"Panama",s:[9,13,14],rep:false},
+  {id:"cze",name:"Rep. Checa",s:range(21),rep:true},
+  {id:"bih",name:"Bosnia y Herz.",s:range(21),rep:true},
+  {id:"tur",name:"Turquia",s:range(21),rep:true},
+  {id:"irq",name:"Iraq",s:range(21),rep:true},
+  {id:"cgo",name:"Congo",s:range(21),rep:true},
+  {id:"swe",name:"Suecia",s:range(21),rep:true}
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────
+var state = {};      // {teamid_num: true/false}
+var isOwner = false;
+var db = null;
+var dbRef = null;
+
+// ── FIREBASE INIT ─────────────────────────────────────────────────────
+function initFirebase() {
+  try {
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.database();
+    dbRef = db.ref('cartas');
+
+    // Listen for real-time changes
+    dbRef.on('value', function(snapshot) {
+      var data = snapshot.val();
+      state = data || {};
+      renderAll();
+      setSyncStatus('ok', 'En vivo');
+      hide('loadingScreen');
+    }, function(err) {
+      setSyncStatus('err', 'Sin conexion');
+      hide('loadingScreen');
+      showToast('Sin conexion a internet');
+    });
+
+  } catch(e) {
+    setSyncStatus('err', 'Error');
+    hide('loadingScreen');
+  }
+}
+
+// ── TOGGLE ────────────────────────────────────────────────────────────
+function toggle(tid, n) {
+  if (!isOwner) { showToast('Modo vista — no puedes editar'); return; }
+  var key = tid + '_' + n;
+  var newVal = !state[key];
+  state[key] = newVal;
+
+  // Update Firebase
+  setSyncStatus('loading', 'Guardando...');
+  var update = {};
+  update[key] = newVal;
+  dbRef.update(update).then(function() {
+    setSyncStatus('ok', 'Guardado');
+  }).catch(function() {
+    setSyncStatus('err', 'Error al guardar');
+  });
+
+  // Update UI immediately
+  var btn = document.getElementById('b' + tid + 'n' + n);
+  if (btn) btn.className = 'sticker-btn' + (newVal ? ' got' : '');
+  refreshCard(tid);
+  refreshGlobal();
+  if (newVal) showToast('#' + n + ' conseguida!');
+}
+
+// ── LOGIN ─────────────────────────────────────────────────────────────
+function showLogin() {
+  document.getElementById('pinInput').value = '';
+  document.getElementById('loginError').textContent = '';
+  show('loginModal');
+  setTimeout(function(){ document.getElementById('pinInput').focus(); }, 200);
+}
+
+function closeLogin() { hide('loginModal'); }
+
+function tryLogin() {
+  var pin = document.getElementById('pinInput').value;
+  if (pin === OWNER_PIN) {
+    isOwner = true;
+    hide('loginModal');
+    setOwnerMode();
+    showToast('Modo edicion activado');
+  } else {
+    document.getElementById('loginError').textContent = 'Contrasena incorrecta';
+    document.getElementById('pinInput').value = '';
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') tryLogin();
+});
+
+function setOwnerMode() {
+  var badge = document.getElementById('modeBadge');
+  badge.textContent = 'MODO EDICION';
+  badge.className = 'mode-badge owner';
+  document.getElementById('syncButtons').innerHTML =
+    '<button class="sync-btn danger" onclick="doLogout()">Salir</button>' +
+    '<button class="sync-btn danger" onclick="confirmReset()">Reset</button>';
+  // Remove readonly class from all buttons
+  var btns = document.querySelectorAll('.sticker-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('readonly');
+}
+
+function doLogout() {
+  isOwner = false;
+  var badge = document.getElementById('modeBadge');
+  badge.textContent = 'MODO VISTA';
+  badge.className = 'mode-badge viewer';
+  document.getElementById('syncButtons').innerHTML =
+    '<button class="sync-btn" onclick="showLogin()">Editar</button>';
+  var btns = document.querySelectorAll('.sticker-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.add('readonly');
+  showToast('Modo vista activado');
+}
+
+function confirmReset() {
+  if (confirm('Reiniciar TODO el progreso?')) {
+    dbRef.set({}).then(function() {
+      state = {};
+      renderAll();
+      showToast('Reiniciado');
+    });
+  }
+}
+
+// ── UI HELPERS ────────────────────────────────────────────────────────
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+function setSyncStatus(type, label) {
+  var dot = document.getElementById('syncDot');
+  var lbl = document.getElementById('syncLabel');
+  dot.className = 'sync-dot ' + type;
+  lbl.textContent = label;
+}
+
+var toastTimer;
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1800);
+}
+
+function toggleCard(tid) {
+  var c = document.getElementById('c' + tid);
+  if (c) c.classList.toggle('open');
+}
+
+function filterCards(type, btn) {
+  var btns = document.querySelectorAll('.filter-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+  btn.classList.add('active');
+  for (var i = 0; i < TEAMS.length; i++) {
+    var t = TEAMS[i];
+    var card = document.getElementById('c' + t.id);
+    if (!card) continue;
+    var got = countGot(t), total = t.s.length;
+    var show = true;
+    if (type === 'pending') show = got === 0;
+    else if (type === 'partial') show = got > 0 && got < total;
+    else if (type === 'done') show = got === total;
+    card.style.display = show ? '' : 'none';
+  }
+}
+
+// ── DATA HELPERS ─────────────────────────────────────────────────────
+function isGot(tid, n) { return state[tid + '_' + n] === true; }
+function countGot(t) { var c = 0; for (var i = 0; i < t.s.length; i++) { if (isGot(t.id, t.s[i])) c++; } return c; }
+
+function refreshCard(tid) {
+  var team = null;
+  for (var i = 0; i < TEAMS.length; i++) { if (TEAMS[i].id === tid) { team = TEAMS[i]; break; } }
+  if (!team) return;
+  var got = countGot(team), total = team.s.length, left = total - got;
+  var pct = Math.round(got / total * 100);
+  var card = document.getElementById('c' + tid);
+  if (!card) return;
+  var badge = card.querySelector('.badge');
+  var fill = card.querySelector('.mini-progress-fill');
+  if (got === total) { badge.textContent = 'Completo'; badge.className = 'badge done'; card.classList.add('completed'); }
+  else if (got > 0) { badge.textContent = left + ' faltan'; badge.className = 'badge partial'; card.classList.remove('completed'); }
+  else { badge.textContent = left + ' faltan'; badge.className = 'badge'; card.classList.remove('completed'); }
+  if (fill) fill.style.width = pct + '%';
+}
+
+function refreshGlobal() {
+  var tl = 0, tg = 0, ta = 0;
+  for (var i = 0; i < TEAMS.length; i++) { var g = countGot(TEAMS[i]); tg += g; tl += TEAMS[i].s.length - g; ta += TEAMS[i].s.length; }
+  document.getElementById('totalLeft').textContent = tl;
+  document.getElementById('totalGot').textContent = tg;
+  var pct = Math.round(tg / ta * 100);
+  document.getElementById('mainProgress').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct + '% — ' + tg + ' de ' + ta + ' conseguidas';
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────
+function buildCard(t) {
+  var got = countGot(t), total = t.s.length, left = total - got;
+  var pct = Math.round(got / total * 100);
+  var bc = got === total ? 'badge done' : got > 0 ? 'badge partial' : 'badge';
+  var bt = got === total ? 'Completo' : left + ' faltan';
+  var cc = got === total ? 'completed' : '';
+  var ro = isOwner ? '' : ' readonly';
+  var stk = '';
+  for (var j = 0; j < t.s.length; j++) {
+    var n = t.s[j]; var g = isGot(t.id, n);
+    stk += '<button class="sticker-btn' + (g ? ' got' : '') + ro + '" id="b' + t.id + 'n' + n + '" onclick="toggle(\'' + t.id + '\',' + n + ')">#' + n + '</button>';
+  }
+  var rl = t.rep ? '<span class="repechaje-label">REP</span>' : '';
+  return '<div class="country-card ' + cc + '" id="c' + t.id + '">'
+    + '<div class="country-header" onclick="toggleCard(\'' + t.id + '\')">'
+    + '<div class="country-left"><span class="country-name">' + t.name + '</span>' + rl + '</div>'
+    + '<div class="country-right">'
+    + '<div class="mini-progress"><div class="mini-progress-fill" style="width:' + pct + '%"></div></div>'
+    + '<span class="' + bc + '">' + bt + '</span>'
+    + '<span class="chevron">v</span>'
+    + '</div></div>'
+    + '<div class="sticker-grid">' + stk + '</div>'
+    + '</div>';
+}
+
+function renderAll() {
+  var h = '<div class="section-divider">Equipos Clasificados</div>';
+  for (var i = 0; i < TEAMS.length; i++) { if (!TEAMS[i].rep) h += buildCard(TEAMS[i]); }
+  h += '<div class="section-divider">Equipos de Repechaje</div>';
+  for (var i = 0; i < TEAMS.length; i++) { if (TEAMS[i].rep) h += buildCard(TEAMS[i]); }
+  document.getElementById('mainContent').innerHTML = h;
+  refreshGlobal();
+}
+
+// ── START ─────────────────────────────────────────────────────────────
+initFirebase();
+</script>
+</body>
+</html>
