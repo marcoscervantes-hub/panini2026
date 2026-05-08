@@ -21,8 +21,6 @@
     --muted:       #7abf96;
     --radius:      14px;
   }
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Russo+One&family=Oswald:wght@400;600;700&display=swap');
- 
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: var(--green-dark);
@@ -34,8 +32,6 @@
       radial-gradient(circle at 20% 20%, rgba(26,158,82,0.15) 0%, transparent 50%),
       radial-gradient(circle at 80% 80%, rgba(212,43,43,0.08) 0%, transparent 50%);
   }
- 
-  /* ── HEADER ─────────────────────────────────────── */
   .header {
     background: linear-gradient(160deg, #0a4a2a 0%, #0d6b3a 40%, #0a4a2a 100%);
     padding: 0;
@@ -46,346 +42,64 @@
     box-shadow: 0 6px 30px rgba(0,0,0,0.6);
     overflow: hidden;
   }
- 
-  /* Decorative blobs like the album cover */
-  .header-blobs {
-    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
-  }
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.25;
-  }
+  .header-blobs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .blob { position: absolute; border-radius: 50%; opacity: 0.25; }
   .blob1 { width:80px;height:80px;background:var(--red);top:-20px;right:30px; }
   .blob2 { width:50px;height:50px;background:var(--yellow);top:10px;right:80px; }
   .blob3 { width:60px;height:60px;background:var(--green-light);top:-10px;left:20px; }
   .blob4 { width:30px;height:30px;background:var(--red);bottom:5px;left:60px; }
   .blob5 { width:40px;height:40px;background:var(--yellow);bottom:-10px;right:10px; }
- 
-  .header-inner {
-    position: relative;
-    padding: 16px 16px 12px;
-    text-align: center;
-  }
- 
+  .header-inner { position: relative; padding: 16px 16px 12px; text-align: center; }
   .header-trophy { font-size: 2rem; line-height: 1; margin-bottom: 2px; }
- 
-  .header-title {
-    font-family: 'Bebas Neue', 'Impact', sans-serif;
-    font-size: 2.8rem;
-    letter-spacing: 6px;
-    color: var(--white);
-    line-height: 0.9;
-    text-shadow: 3px 3px 0px rgba(0,0,0,0.4), 0 0 40px rgba(245,197,24,0.3);
-  }
- 
-  .header-title span {
-    color: var(--yellow);
-    text-shadow: 2px 2px 0px rgba(0,0,0,0.5), 0 0 20px rgba(245,197,24,0.5);
-  }
- 
-  .header-subtitle {
-    font-family: 'Russo One', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 4px;
-    color: var(--yellow);
-    text-transform: uppercase;
-    margin-top: 2px;
-    opacity: 0.9;
-  }
- 
-  .header-panini {
-    display: inline-block;
-    background: var(--yellow);
-    color: #000;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    padding: 2px 10px;
-    border-radius: 4px;
-    margin-top: 6px;
-  }
- 
-  .mode-badge {
-    display: inline-block;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 600;
-    padding: 2px 12px;
-    border-radius: 20px;
-    margin-top: 6px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
+  .header-title { font-family: 'Bebas Neue', 'Impact', sans-serif; font-size: 2.8rem; letter-spacing: 6px; color: var(--white); line-height: 0.9; text-shadow: 3px 3px 0px rgba(0,0,0,0.4), 0 0 40px rgba(245,197,24,0.3); }
+  .header-title span { color: var(--yellow); text-shadow: 2px 2px 0px rgba(0,0,0,0.5), 0 0 20px rgba(245,197,24,0.5); }
+  .header-subtitle { font-family: 'Russo One', sans-serif; font-size: 0.65rem; letter-spacing: 4px; color: var(--yellow); text-transform: uppercase; margin-top: 2px; opacity: 0.9; }
+  .header-panini { display: inline-block; background: var(--yellow); color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 2px; padding: 2px 10px; border-radius: 4px; margin-top: 6px; }
+  .mode-badge { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 0.62rem; font-weight: 600; padding: 2px 12px; border-radius: 20px; margin-top: 6px; letter-spacing: 2px; text-transform: uppercase; }
   .mode-badge.owner { background: var(--yellow); color: #000; }
   .mode-badge.viewer { background: rgba(255,255,255,0.1); color: var(--muted); border: 1px solid var(--border); }
- 
-  .header-stats {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .stat-pill {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(245,197,24,0.3);
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
+  .header-stats { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
+  .stat-pill { background: rgba(0,0,0,0.3); border: 1px solid rgba(245,197,24,0.3); border-radius: 20px; padding: 4px 14px; font-family: 'Oswald', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; }
   .stat-pill span { color: var(--yellow); }
- 
-  /* ── PROGRESS ────────────────────────────────────── */
-  .progress-wrap {
-    background: rgba(0,0,0,0.4);
-    padding: 8px 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  .progress-bar-bg {
-    background: rgba(0,0,0,0.4);
-    border-radius: 10px;
-    height: 10px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .progress-bar-fill {
-    background: linear-gradient(90deg, var(--red), var(--yellow), var(--green-light));
-    height: 100%;
-    border-radius: 10px;
-    transition: width 0.5s ease;
-    width: 0%;
-    box-shadow: 0 0 8px rgba(245,197,24,0.4);
-  }
-  .progress-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.68rem;
-    color: var(--muted);
-    text-align: right;
-    margin-top: 4px;
-    letter-spacing: 1px;
-  }
- 
-  /* ── FILTERS ─────────────────────────────────────── */
-  .filter-wrap {
-    padding: 8px 12px;
-    display: flex;
-    gap: 7px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    border-bottom: 1px solid var(--border);
-    background: rgba(0,0,0,0.2);
-  }
+  .progress-wrap { background: rgba(0,0,0,0.4); padding: 8px 16px; border-bottom: 1px solid var(--border); }
+  .progress-bar-bg { background: rgba(0,0,0,0.4); border-radius: 10px; height: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .progress-bar-fill { background: linear-gradient(90deg, var(--red), var(--yellow), var(--green-light)); height: 100%; border-radius: 10px; transition: width 0.5s ease; width: 0%; box-shadow: 0 0 8px rgba(245,197,24,0.4); }
+  .progress-label { font-family: 'Oswald', sans-serif; font-size: 0.68rem; color: var(--muted); text-align: right; margin-top: 4px; letter-spacing: 1px; }
+  .filter-wrap { padding: 8px 12px; display: flex; gap: 7px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.2); }
   .filter-wrap::-webkit-scrollbar { display: none; }
-  .filter-btn {
-    flex-shrink: 0;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--muted);
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 5px 16px;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: all 0.2s;
-  }
-  .filter-btn.active {
-    background: var(--yellow);
-    border-color: var(--yellow);
-    color: #000;
-  }
- 
-  /* ── CONTENT ─────────────────────────────────────── */
+  .filter-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--border); border-radius: 20px; color: var(--muted); font-family: 'Oswald', sans-serif; font-size: 0.75rem; font-weight: 600; padding: 5px 16px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase; transition: all 0.2s; }
+  .filter-btn.active { background: var(--yellow); border-color: var(--yellow); color: #000; }
   .content { padding: 10px 10px 0; }
- 
-  .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 4px 8px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 4px;
-    color: var(--yellow);
-    text-transform: uppercase;
-  }
+  .section-divider { display: flex; align-items: center; gap: 10px; padding: 14px 4px 8px; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 4px; color: var(--yellow); text-transform: uppercase; }
   .section-divider::before { content: '⚽'; font-size: 0.9rem; }
   .section-divider::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--yellow), transparent); }
- 
-  /* ── CARDS ───────────────────────────────────────── */
-  .country-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-    transition: border-color 0.3s;
-  }
-  .country-card.completed {
-    border-color: rgba(245,197,24,0.5);
-    background: linear-gradient(135deg, #0c3d22, #0a4a1a);
-  }
- 
-  .country-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 14px;
-    cursor: pointer;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    gap: 8px;
-  }
- 
+  .country-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.3); transition: border-color 0.3s; }
+  .country-card.completed { border-color: rgba(245,197,24,0.5); background: linear-gradient(135deg, #0c3d22, #0a4a1a); }
+  .country-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; gap: 8px; }
   .country-left { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
- 
-  .country-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.05rem;
-    letter-spacing: 2px;
-    color: var(--white);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
- 
-  .repechaje-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.55rem;
-    color: var(--yellow);
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: rgba(245,197,24,0.15);
-    border: 1px solid rgba(245,197,24,0.3);
-    padding: 1px 6px;
-    border-radius: 4px;
-    flex-shrink: 0;
-    text-transform: uppercase;
-  }
- 
+  .country-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; letter-spacing: 2px; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .repechaje-label { font-family: 'Oswald', sans-serif; font-size: 0.55rem; color: var(--yellow); font-weight: 700; letter-spacing: 1px; background: rgba(245,197,24,0.15); border: 1px solid rgba(245,197,24,0.3); padding: 1px 6px; border-radius: 4px; flex-shrink: 0; text-transform: uppercase; }
   .country-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
- 
   .mini-progress { height: 4px; background: rgba(0,0,0,0.4); width: 50px; border-radius: 4px; overflow: hidden; }
   .mini-progress-fill { height: 100%; background: linear-gradient(90deg, var(--red), var(--yellow)); border-radius: 4px; transition: width 0.3s; }
- 
-  .badge {
-    background: var(--red);
-    color: white;
-    border-radius: 20px;
-    padding: 3px 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 600;
-    white-space: nowrap;
-    letter-spacing: 1px;
-  }
+  .badge { background: var(--red); color: white; border-radius: 20px; padding: 3px 10px; font-family: 'Oswald', sans-serif; font-size: 0.68rem; font-weight: 600; white-space: nowrap; letter-spacing: 1px; }
   .badge.done { background: var(--yellow); color: #000; }
   .badge.partial { background: var(--green-light); color: #000; }
- 
-  .chevron {
-    color: var(--muted);
-    font-size: 0.75rem;
-    transition: transform 0.25s;
-    display: inline-block;
-  }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.25s; display: inline-block; }
   .country-card.open .chevron { transform: rotate(180deg); }
- 
-  /* ── STICKER GRID ────────────────────────────────── */
-  .sticker-grid {
-    display: none;
-    padding: 10px 12px 14px;
-    border-top: 1px solid var(--border);
-    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
-    gap: 6px;
-    background: rgba(0,0,0,0.15);
-  }
+  .sticker-grid { display: none; padding: 10px 12px 14px; border-top: 1px solid var(--border); grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; background: rgba(0,0,0,0.15); }
   .country-card.open .sticker-grid { display: grid; }
- 
-  .sticker-btn {
-    border-radius: 10px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding: 10px 4px;
-    text-align: center;
-    position: relative;
-    -webkit-tap-highlight-color: transparent;
-    transition: all 0.15s;
-    border: 1.5px solid rgba(255,255,255,0.1);
-    background: rgba(0,0,0,0.25);
-    color: rgba(255,255,255,0.35);
-    cursor: default;
-  }
- 
-  /* Ya la tienes desde siempre — verde */
-  .sticker-btn.owned {
-    background: rgba(26,158,82,0.2);
-    border-color: var(--green-light);
-    color: #4ddb8a;
-  }
-  .sticker-btn.owned::after {
-    content: '✓';
-    position: absolute;
-    top: 1px; right: 4px;
-    font-size: 0.55rem;
-    color: #4ddb8a;
-  }
- 
-  /* Te falta — modo vista */
-  .sticker-btn.missing-view {
-    background: rgba(212,43,43,0.08);
-    border-color: rgba(212,43,43,0.25);
-    color: rgba(212,43,43,0.5);
-    cursor: default;
-  }
- 
-  /* Te falta — modo edicion (clickeable) */
-  .sticker-btn.missing-edit {
-    background: rgba(212,43,43,0.1);
-    border-color: rgba(212,43,43,0.4);
-    color: rgba(255,100,100,0.8);
-    cursor: pointer;
-  }
+  .sticker-btn { border-radius: 10px; font-family: 'Oswald', sans-serif; font-size: 0.82rem; font-weight: 600; letter-spacing: 1px; padding: 10px 4px; text-align: center; position: relative; -webkit-tap-highlight-color: transparent; transition: all 0.15s; border: 1.5px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.25); color: rgba(255,255,255,0.35); cursor: default; }
+  .sticker-btn.owned { background: rgba(26,158,82,0.2); border-color: var(--green-light); color: #4ddb8a; }
+  .sticker-btn.owned::after { content: '✓'; position: absolute; top: 1px; right: 4px; font-size: 0.55rem; color: #4ddb8a; }
+  .sticker-btn.missing-view { background: rgba(212,43,43,0.08); border-color: rgba(212,43,43,0.25); color: rgba(212,43,43,0.5); cursor: default; }
+  .sticker-btn.missing-edit { background: rgba(212,43,43,0.1); border-color: rgba(212,43,43,0.4); color: rgba(255,100,100,0.8); cursor: pointer; }
   .sticker-btn.missing-edit:active { transform: scale(0.88); }
-  .sticker-btn.missing-edit:hover {
-    background: rgba(245,197,24,0.15);
-    border-color: var(--yellow);
-    color: var(--yellow);
-  }
- 
-  /* Faltaba pero ya la conseguiste */
-  .sticker-btn.missing-got {
-    background: rgba(26,158,82,0.2);
-    border-color: var(--green-light);
-    color: #4ddb8a;
-    cursor: pointer;
-  }
-  .sticker-btn.missing-got::after {
-    content: '✓';
-    position: absolute;
-    top: 1px; right: 4px;
-    font-size: 0.55rem;
-    color: #4ddb8a;
-  }
+  .sticker-btn.missing-edit:hover { background: rgba(245,197,24,0.15); border-color: var(--yellow); color: var(--yellow); }
+  .sticker-btn.missing-got { background: rgba(26,158,82,0.2); border-color: var(--green-light); color: #4ddb8a; cursor: pointer; }
+  .sticker-btn.missing-got::after { content: '✓'; position: absolute; top: 1px; right: 4px; font-size: 0.55rem; color: #4ddb8a; }
   .sticker-btn.missing-got:active { transform: scale(0.88); }
- 
-  /* ── SYNC BAR ─────────────────────────────────────── */
-  .sync-bar {
-    position: fixed; bottom: 0; left: 0; right: 0;
-    background: linear-gradient(135deg, #061a0e, #0a2e18);
-    border-top: 2px solid var(--yellow);
-    padding: 8px 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    z-index: 99; font-size: 0.72rem;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
-  }
+  .sync-bar { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #061a0e, #0a2e18); border-top: 2px solid var(--yellow); padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; z-index: 99; font-size: 0.72rem; box-shadow: 0 -4px 20px rgba(0,0,0,0.5); }
   .sync-dot { width: 7px; height: 7px; border-radius: 50%; margin-right: 6px; display: inline-block; }
   .sync-dot.ok { background: #4ddb8a; }
   .sync-dot.loading { background: var(--yellow); animation: pulse 1s infinite; }
@@ -393,134 +107,28 @@
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
   .sync-left { display: flex; align-items: center; color: var(--muted); font-family: 'Oswald', sans-serif; letter-spacing: 1px; }
   .sync-right { display: flex; gap: 10px; }
-  .sync-btn {
-    background: transparent;
-    border: 1px solid rgba(245,197,24,0.3);
-    color: var(--yellow);
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 1px;
-    padding: 4px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    text-transform: uppercase;
-  }
+  .sync-btn { background: transparent; border: 1px solid rgba(245,197,24,0.3); color: var(--yellow); font-family: 'Oswald', sans-serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; padding: 4px 14px; border-radius: 20px; cursor: pointer; text-transform: uppercase; }
   .sync-btn.danger { border-color: rgba(212,43,43,0.5); color: #ff6b6b; }
- 
-  /* ── MODAL ───────────────────────────────────────── */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; z-index: 200; padding: 20px; }
   .modal-overlay.hidden { display: none; }
-  .modal {
-    background: linear-gradient(160deg, #0c3d22, #061a0e);
-    border: 2px solid var(--yellow);
-    border-radius: 20px;
-    padding: 30px 24px;
-    width: 100%; max-width: 340px;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(245,197,24,0.1);
-  }
+  .modal { background: linear-gradient(160deg, #0c3d22, #061a0e); border: 2px solid var(--yellow); border-radius: 20px; padding: 30px 24px; width: 100%; max-width: 340px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 40px rgba(245,197,24,0.1); }
   .modal-trophy { font-size: 2.5rem; margin-bottom: 8px; }
-  .modal h2 {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.8rem;
-    letter-spacing: 4px;
-    color: var(--yellow);
-    margin-bottom: 6px;
-  }
+  .modal h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 4px; color: var(--yellow); margin-bottom: 6px; }
   .modal p { font-family: 'Oswald', sans-serif; font-size: 0.82rem; color: var(--muted); margin-bottom: 20px; line-height: 1.5; letter-spacing: 0.5px; }
-  .modal input {
-    width: 100%;
-    background: rgba(0,0,0,0.4);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    color: var(--white);
-    font-family: 'Oswald', sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    padding: 12px 14px;
-    margin-bottom: 12px;
-    outline: none;
-    text-align: center;
-  }
+  .modal input { width: 100%; background: rgba(0,0,0,0.4); border: 1.5px solid var(--border); border-radius: 10px; color: var(--white); font-family: 'Oswald', sans-serif; font-size: 1rem; font-weight: 600; letter-spacing: 4px; padding: 12px 14px; margin-bottom: 12px; outline: none; text-align: center; }
   .modal input:focus { border-color: var(--yellow); }
-  .modal-btn {
-    width: 100%;
-    background: linear-gradient(135deg, var(--yellow), #e6b800);
-    border: none;
-    border-radius: 10px;
-    color: #000;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    padding: 13px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    box-shadow: 0 4px 15px rgba(245,197,24,0.3);
-  }
-  .modal-btn.secondary {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.82rem;
-    letter-spacing: 1px;
-    padding: 10px;
-  }
+  .modal-btn { width: 100%; background: linear-gradient(135deg, var(--yellow), #e6b800); border: none; border-radius: 10px; color: #000; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px; padding: 13px; cursor: pointer; margin-bottom: 8px; box-shadow: 0 4px 15px rgba(245,197,24,0.3); }
+  .modal-btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1px; padding: 10px; }
   .modal-error { color: #ff6b6b; font-family: 'Oswald', sans-serif; font-size: 0.78rem; margin-bottom: 10px; min-height: 18px; letter-spacing: 0.5px; }
- 
-  /* ── TOAST ───────────────────────────────────────── */
-  .toast {
-    position: fixed; bottom: 52px; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: linear-gradient(135deg, var(--green-light), #0d8a40);
-    color: white;
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 0.82rem;
-    letter-spacing: 1px;
-    padding: 10px 22px;
-    border-radius: 30px;
-    z-index: 300;
-    transition: transform 0.3s ease;
-    white-space: nowrap;
-    box-shadow: 0 4px 20px rgba(26,158,82,0.5);
-    pointer-events: none;
-  }
+  .toast { position: fixed; bottom: 52px; left: 50%; transform: translateX(-50%) translateY(80px); background: linear-gradient(135deg, var(--green-light), #0d8a40); color: white; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.82rem; letter-spacing: 1px; padding: 10px 22px; border-radius: 30px; z-index: 300; transition: transform 0.3s ease; white-space: nowrap; box-shadow: 0 4px 20px rgba(26,158,82,0.5); pointer-events: none; }
   .toast.show { transform: translateX(-50%) translateY(0); }
- 
-  /* ── LOADING ─────────────────────────────────────── */
-  .loading-screen {
-    position: fixed; inset: 0;
-    background: linear-gradient(160deg, #0a4a2a, #061a0e);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    z-index: 500; gap: 16px;
-  }
+  .loading-screen { position: fixed; inset: 0; background: linear-gradient(160deg, #0a4a2a, #061a0e); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 500; gap: 16px; }
   .loading-screen.hidden { display: none; }
   .loading-trophy { font-size: 3.5rem; animation: bounce 1s ease infinite alternate; }
   @keyframes bounce { from{transform:translateY(0)} to{transform:translateY(-10px)} }
-  .loading-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem;
-    letter-spacing: 6px;
-    color: var(--yellow);
-    text-shadow: 0 0 30px rgba(245,197,24,0.5);
-  }
-  .loading-sub {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .spinner {
-    width: 36px; height: 36px;
-    border: 3px solid rgba(245,197,24,0.2);
-    border-top-color: var(--yellow);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+  .loading-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 6px; color: var(--yellow); text-shadow: 0 0 30px rgba(245,197,24,0.5); }
+  .loading-sub { font-family: 'Oswald', sans-serif; font-size: 0.75rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+  .spinner { width: 36px; height: 36px; border: 3px solid rgba(245,197,24,0.2); border-top-color: var(--yellow); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
@@ -547,18 +155,15 @@
  
 <div class="header">
   <div class="header-blobs">
-    <div class="blob blob1"></div>
-    <div class="blob blob2"></div>
-    <div class="blob blob3"></div>
-    <div class="blob blob4"></div>
+    <div class="blob blob1"></div><div class="blob blob2"></div>
+    <div class="blob blob3"></div><div class="blob blob4"></div>
     <div class="blob blob5"></div>
   </div>
   <div class="header-inner">
     <div class="header-trophy">🏆</div>
     <div class="header-title">FIFA WORLD CUP <span>2026</span></div>
     <div class="header-subtitle">Official Sticker Collection Tracker</div>
-    <div class="header-panini">PANINI</div>
-    <br>
+    <div class="header-panini">PANINI</div><br>
     <div id="modeBadge" class="mode-badge viewer">Modo Vista</div>
     <div class="header-stats">
       <div class="stat-pill">Faltan: <span id="totalLeft">-</span></div>
@@ -607,58 +212,58 @@ var FIREBASE_CONFIG = {
 };
 var OWNER_PIN = "panini2026";
  
-function range(n){var a=[];for(var i=1;i<=n;i++)a.push(i);return a;}
- 
+// Todos los equipos tienen 20 cartas (1-20), FWC tiene 18 (1-18)
+// missing = numeros que AUN TE FALTAN
 var TEAMS=[
   {id:"fwc", name:"FWC (Mundial)",   missing:[2,6,8,18],           total:18, rep:false},
-  {id:"mex", name:"Mexico",          missing:[11],                  total:21, rep:false},
-  {id:"rsa", name:"Sudafrica",       missing:[6,12,20],             total:21, rep:false},
-  {id:"kor", name:"Corea del Sur",   missing:[3],                   total:21, rep:false},
-  {id:"can", name:"Canada",          missing:[9],                   total:21, rep:false},
-  {id:"qat", name:"Qatar",           missing:[5],                   total:21, rep:false},
-  {id:"sui", name:"Suiza",           missing:[16],                  total:21, rep:false},
-  {id:"bra", name:"Brasil",          missing:[12,14],               total:21, rep:false},
-  {id:"mar", name:"Marruecos",       missing:[2,4,12],              total:21, rep:false},
-  {id:"hai", name:"Haiti",           missing:[1,12,20],             total:21, rep:false},
-  {id:"sco", name:"Escocia",         missing:[3],                   total:21, rep:false},
-  {id:"usa", name:"USA",             missing:[1,16],                total:21, rep:false},
-  {id:"par", name:"Paraguay",        missing:[15],                  total:21, rep:false},
-  {id:"aus", name:"Australia",       missing:[14,15,17],            total:21, rep:false},
-  {id:"ger", name:"Alemania",        missing:[10],                  total:21, rep:false},
-  {id:"cuw", name:"Curazao",         missing:[3,14,18],             total:21, rep:false},
-  {id:"civ", name:"Costa de Marfil", missing:[16,20],               total:21, rep:false},
-  {id:"ecu", name:"Ecuador",         missing:[],                    total:21, rep:false},
-  {id:"ned", name:"Holanda",         missing:[],                    total:21, rep:false},
-  {id:"jpn", name:"Japon",           missing:[4,13],                total:21, rep:false},
-  {id:"tun", name:"Tunez",           missing:[11],                  total:21, rep:false},
-  {id:"bel", name:"Belgica",         missing:[4,17],                total:21, rep:false},
-  {id:"egy", name:"Egipto",          missing:[4,8,12],              total:21, rep:false},
-  {id:"irn", name:"Iran",            missing:[11,13],               total:21, rep:false},
-  {id:"nzl", name:"Nueva Zelanda",   missing:[1,16],                total:21, rep:false},
-  {id:"esp", name:"Espana",          missing:[11],                  total:21, rep:false},
-  {id:"cpv", name:"Cabo Verde",      missing:[20],                  total:21, rep:false},
-  {id:"ksa", name:"Arabia Saudita",  missing:[4,11,18],             total:21, rep:false},
-  {id:"uru", name:"Uruguay",         missing:[1,4,8],               total:21, rep:false},
-  {id:"fra", name:"Francia",         missing:[14,15,18],            total:21, rep:false},
-  {id:"sen", name:"Senegal",         missing:[],                    total:21, rep:false},
-  {id:"nor", name:"Noruega",         missing:[1,2,5,6,12],          total:21, rep:false},
-  {id:"arg", name:"Argentina",       missing:[20],                  total:21, rep:false},
-  {id:"alg", name:"Argelia",         missing:[4],                   total:21, rep:false},
-  {id:"aut", name:"Austria",         missing:[5,10,17],             total:21, rep:false},
-  {id:"jor", name:"Jordania",        missing:[1,4,5,6,9,10,13,19], total:21, rep:false},
-  {id:"por", name:"Portugal",        missing:[],                    total:21, rep:false},
-  {id:"uzb", name:"Uzbekistan",      missing:[18],                  total:21, rep:false},
-  {id:"col", name:"Colombia",        missing:[15],                  total:21, rep:false},
-  {id:"eng", name:"Inglaterra",      missing:[3,17],                total:21, rep:false},
-  {id:"cro", name:"Croacia",         missing:[13,15],               total:21, rep:false},
-  {id:"gha", name:"Ghana",           missing:[4],                   total:21, rep:false},
-  {id:"pan", name:"Panama",          missing:[9,13],                total:21, rep:false},
-  {id:"cze", name:"Rep. Checa",      missing:range(21),             total:21, rep:true},
-  {id:"bih", name:"Bosnia y Herz.",  missing:range(21),             total:21, rep:true},
-  {id:"tur", name:"Turquia",         missing:range(21),             total:21, rep:true},
-  {id:"irq", name:"Iraq",            missing:range(21),             total:21, rep:true},
-  {id:"cgo", name:"Congo",           missing:range(21),             total:21, rep:true},
-  {id:"swe", name:"Suecia",          missing:range(21),             total:21, rep:true}
+  {id:"mex", name:"Mexico",          missing:[11],                  total:20, rep:false},
+  {id:"rsa", name:"Sudafrica",       missing:[6,12,20],             total:20, rep:false},
+  {id:"kor", name:"Corea del Sur",   missing:[3],                   total:20, rep:false},
+  {id:"can", name:"Canada",          missing:[9],                   total:20, rep:false},
+  {id:"qat", name:"Qatar",           missing:[5],                   total:20, rep:false},
+  {id:"sui", name:"Suiza",           missing:[16],                  total:20, rep:false},
+  {id:"bra", name:"Brasil",          missing:[12,14],               total:20, rep:false},
+  {id:"mar", name:"Marruecos",       missing:[2,4,12],              total:20, rep:false},
+  {id:"hai", name:"Haiti",           missing:[1,12,20],             total:20, rep:false},
+  {id:"sco", name:"Escocia",         missing:[3],                   total:20, rep:false},
+  {id:"usa", name:"USA",             missing:[1,16],                total:20, rep:false},
+  {id:"par", name:"Paraguay",        missing:[15],                  total:20, rep:false},
+  {id:"aus", name:"Australia",       missing:[14,15,17],            total:20, rep:false},
+  {id:"ger", name:"Alemania",        missing:[10],                  total:20, rep:false},
+  {id:"cuw", name:"Curazao",         missing:[3,14,18],             total:20, rep:false},
+  {id:"civ", name:"Costa de Marfil", missing:[16,20],               total:20, rep:false},
+  {id:"ecu", name:"Ecuador",         missing:[],                    total:20, rep:false},
+  {id:"ned", name:"Holanda",         missing:[],                    total:20, rep:false},
+  {id:"jpn", name:"Japon",           missing:[4,13],                total:20, rep:false},
+  {id:"tun", name:"Tunez",           missing:[11],                  total:20, rep:false},
+  {id:"bel", name:"Belgica",         missing:[4,17],                total:20, rep:false},
+  {id:"egy", name:"Egipto",          missing:[4,8,12],              total:20, rep:false},
+  {id:"irn", name:"Iran",            missing:[11,13],               total:20, rep:false},
+  {id:"nzl", name:"Nueva Zelanda",   missing:[1,16],                total:20, rep:false},
+  {id:"esp", name:"Espana",          missing:[11],                  total:20, rep:false},
+  {id:"cpv", name:"Cabo Verde",      missing:[20],                  total:20, rep:false},
+  {id:"ksa", name:"Arabia Saudita",  missing:[4,11,18],             total:20, rep:false},
+  {id:"uru", name:"Uruguay",         missing:[1,4,8],               total:20, rep:false},
+  {id:"fra", name:"Francia",         missing:[14,15,18],            total:20, rep:false},
+  {id:"sen", name:"Senegal",         missing:[],                    total:20, rep:false},
+  {id:"nor", name:"Noruega",         missing:[1,2,5,6,12],          total:20, rep:false},
+  {id:"arg", name:"Argentina",       missing:[20],                  total:20, rep:false},
+  {id:"alg", name:"Argelia",         missing:[4],                   total:20, rep:false},
+  {id:"aut", name:"Austria",         missing:[5,10,17],             total:20, rep:false},
+  {id:"jor", name:"Jordania",        missing:[1,4,5,6,9,10,13,19], total:20, rep:false},
+  {id:"por", name:"Portugal",        missing:[],                    total:20, rep:false},
+  {id:"uzb", name:"Uzbekistan",      missing:[18],                  total:20, rep:false},
+  {id:"col", name:"Colombia",        missing:[15],                  total:20, rep:false},
+  {id:"eng", name:"Inglaterra",      missing:[3,17],                total:20, rep:false},
+  {id:"cro", name:"Croacia",         missing:[13,15],               total:20, rep:false},
+  {id:"gha", name:"Ghana",           missing:[4],                   total:20, rep:false},
+  {id:"pan", name:"Panama",          missing:[9,13],                total:20, rep:false},
+  {id:"cze", name:"Rep. Checa",      missing:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total:20, rep:true},
+  {id:"bih", name:"Bosnia y Herz.",  missing:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total:20, rep:true},
+  {id:"tur", name:"Turquia",         missing:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total:20, rep:true},
+  {id:"irq", name:"Iraq",            missing:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total:20, rep:true},
+  {id:"cgo", name:"Congo",           missing:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total:20, rep:true},
+  {id:"swe", name:"Suecia",          missing:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total:20, rep:true}
 ];
  
 function buildInitialState(){
